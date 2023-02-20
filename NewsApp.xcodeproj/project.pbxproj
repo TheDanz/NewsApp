@@ -15,6 +15,8 @@
 		05648F0F299D381C0044621D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05648F0D299D381C0044621D /* LaunchScreen.storyboard */; };
 		05D250E429A00BDC00BDB7AF /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D250E329A00BDC00BDB7AF /* APICaller.swift */; };
 		05D250E629A00C8D00BDB7AF /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D250E529A00C8D00BDB7AF /* JSONModel.swift */; };
+		05E3A95129A3F810008B146B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3A94F29A3F810008B146B /* NewsTableViewCell.swift */; };
+		05E3A95229A3F810008B146B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E3A95029A3F810008B146B /* NewsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		05648F10299D381C0044621D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05D250E329A00BDC00BDB7AF /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		05D250E529A00C8D00BDB7AF /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
+		05E3A94F29A3F810008B146B /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		05E3A95029A3F810008B146B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				05648F04299D381B0044621D /* SceneDelegate.swift */,
 				05648F06299D381B0044621D /* ViewController.swift */,
 				05D250E329A00BDC00BDB7AF /* APICaller.swift */,
+				05E3A94F29A3F810008B146B /* NewsTableViewCell.swift */,
+				05E3A95029A3F810008B146B /* NewsTableViewCell.xib */,
 				05D250E529A00C8D00BDB7AF /* JSONModel.swift */,
 				05648F08299D381B0044621D /* Main.storyboard */,
 				05648F0B299D381C0044621D /* Assets.xcassets */,
@@ -133,6 +139,7 @@
 			files = (
 				05648F0F299D381C0044621D /* LaunchScreen.storyboard in Resources */,
 				05648F0C299D381C0044621D /* Assets.xcassets in Resources */,
+				05E3A95229A3F810008B146B /* NewsTableViewCell.xib in Resources */,
 				05648F0A299D381B0044621D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +153,7 @@
 			files = (
 				05D250E629A00C8D00BDB7AF /* JSONModel.swift in Sources */,
 				05648F07299D381B0044621D /* ViewController.swift in Sources */,
+				05E3A95129A3F810008B146B /* NewsTableViewCell.swift in Sources */,
 				05648F03299D381B0044621D /* AppDelegate.swift in Sources */,
 				05648F05299D381B0044621D /* SceneDelegate.swift in Sources */,
 				05D250E429A00BDC00BDB7AF /* APICaller.swift in Sources */,
