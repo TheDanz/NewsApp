@@ -46,6 +46,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationVC = DetailsViewController()
+        destinationVC.descriptionLabel.text = data[indexPath.row].description
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     
