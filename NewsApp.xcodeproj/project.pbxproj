@@ -17,6 +17,7 @@
 		05D250E629A00C8D00BDB7AF /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D250E529A00C8D00BDB7AF /* JSONModel.swift */; };
 		05E3A95129A3F810008B146B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3A94F29A3F810008B146B /* NewsTableViewCell.swift */; };
 		05E3A95229A3F810008B146B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E3A95029A3F810008B146B /* NewsTableViewCell.xib */; };
+		05F543C029A533CB00A61A2C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F543BF29A533CB00A61A2C /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		05D250E529A00C8D00BDB7AF /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 		05E3A94F29A3F810008B146B /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		05E3A95029A3F810008B146B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
+		05F543BF29A533CB00A61A2C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				05648F02299D381A0044621D /* AppDelegate.swift */,
 				05648F04299D381B0044621D /* SceneDelegate.swift */,
 				05648F06299D381B0044621D /* ViewController.swift */,
+				05F543BF29A533CB00A61A2C /* DetailsViewController.swift */,
 				05D250E329A00BDC00BDB7AF /* APICaller.swift */,
 				05E3A94F29A3F810008B146B /* NewsTableViewCell.swift */,
 				05E3A95029A3F810008B146B /* NewsTableViewCell.xib */,
@@ -155,6 +158,7 @@
 				05648F07299D381B0044621D /* ViewController.swift in Sources */,
 				05E3A95129A3F810008B146B /* NewsTableViewCell.swift in Sources */,
 				05648F03299D381B0044621D /* AppDelegate.swift in Sources */,
+				05F543C029A533CB00A61A2C /* DetailsViewController.swift in Sources */,
 				05648F05299D381B0044621D /* SceneDelegate.swift in Sources */,
 				05D250E429A00BDC00BDB7AF /* APICaller.swift in Sources */,
 			);
