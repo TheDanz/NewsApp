@@ -4,7 +4,7 @@ class ViewController: UIViewController {
     
     let cellIdentifier = "NewsTableViewCell"
     var data: [Article] = []
-    let apiCaller = APICaller()
+    let networkManager = NetworkManager()
     
     var newsTableView: UITableView = {
         let tableView = UITableView()
@@ -21,10 +21,15 @@ class ViewController: UIViewController {
         let xibCell = UINib(nibName: cellIdentifier, bundle: nil)
         newsTableView.register(xibCell, forCellReuseIdentifier: cellIdentifier)
         
-        apiCaller.dataRequest { articles in
-            self.data = articles
-            DispatchQueue.main.async {
-                self.newsTableView.reloadData()
+        networkManager.getArticles { result in
+            switch result {
+            case .success(let articles):
+                self.data = articles
+                DispatchQueue.main.async {
+                    self.newsTableView.reloadData()
+                }
+            case .failure(_):
+                break
             }
         }
     }
@@ -60,7 +65,7 @@ extension ViewController: UITableViewDataSource {
         }
         cell.titleLabel.text = data[indexPath.row].title
         let url = URL(string: data[indexPath.row].urlToImage!)
-        apiCaller.getPoster(from: url!) { image in
+        networkManager.getPoster(from: url!) { image in
             DispatchQueue.main.async {
                 cell.posterImageView.image = image
             }
