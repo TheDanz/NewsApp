@@ -6,10 +6,8 @@ class ViewController: UIViewController {
     var data: [Article] = []
     let networkManager = NetworkManager()
     
-    var newsTableView: UITableView = {
-        let tableView = UITableView()
-        return tableView
-    }()
+    var newsTableView = UITableView()
+    var newsRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +19,9 @@ class ViewController: UIViewController {
         let xibCell = UINib(nibName: cellIdentifier, bundle: nil)
         newsTableView.register(xibCell, forCellReuseIdentifier: cellIdentifier)
         
+        newsRefreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
+        newsTableView.refreshControl = self.newsRefreshControl
+
         networkManager.getArticles { result in
             switch result {
             case .success(let articles):
@@ -38,6 +39,22 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         newsTableView.frame = view.bounds
+    }
+    
+    @objc
+    func refreshData(sender: UIRefreshControl) {
+        networkManager.getArticles { result in
+            switch result {
+            case .success(let articles):
+                self.data = articles
+                DispatchQueue.main.async {
+                    self.newsTableView.reloadData()
+                }
+            case .failure(_):
+                break
+            }
+        }
+        self.newsRefreshControl.endRefreshing()
     }
 }
 
