@@ -24,13 +24,36 @@ class DetailsViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
+    let publicationDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
+        label.textAlignment = .right
+        return label
+    }()
+    
+    let sourceNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
+        label.textAlignment = .right
+        return label
+    }()
 
-    var networkManager = NetworkManager()
     var article: Article? {
         didSet {
-            titleLabel.text = article?.title
-            descriptionLabel.text = article?.description
-            networkManager.getPoster(from: URL(string: (article?.urlToImage)!)!) { image in
+            
+            titleLabel.text = article?.title ?? "Title"
+            descriptionLabel.text = article?.description ?? "Description"
+            publicationDateLabel.text = article?.publishedAt ?? "Publication Date"
+            sourceNameLabel.text = article?.source?.name ?? "Sourse"
+
+            guard let urlToImage = article?.urlToImage,
+                  let url = URL(string: urlToImage) else { return }
+            
+            let networkManager = NetworkManager()
+            networkManager.getPoster(from: url) { image in
                 DispatchQueue.main.async {
                     self.posterImageView.image = image
                 }
@@ -46,10 +69,14 @@ class DetailsViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(posterImageView)
         view.addSubview(descriptionLabel)
+        view.addSubview(publicationDateLabel)
+        view.addSubview(sourceNameLabel)
         
         activateTitleLabelConstraints()
         activatePosterImageViewConstraints()
         activateDescriptionLabelConstraints()
+        activatePublicationDateLabelConstraints()
+        activateSourceNameLabelConstraints()
     }
     
     func activateTitleLabelConstraints() {
@@ -71,5 +98,19 @@ class DetailsViewController: UIViewController {
         descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 0).isActive = true
         descriptionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+    }
+    
+    func activatePublicationDateLabelConstraints() {
+        publicationDateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        publicationDateLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        publicationDateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 0).isActive = true
+        publicationDateLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+    }
+    
+    func activateSourceNameLabelConstraints() {
+        sourceNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        sourceNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        sourceNameLabel.topAnchor.constraint(equalTo: publicationDateLabel.bottomAnchor, constant: 0).isActive = true
+        sourceNameLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
     }
 }
