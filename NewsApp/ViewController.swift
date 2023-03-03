@@ -3,11 +3,11 @@ import UIKit
 class ViewController: UIViewController {
     
     let cellIdentifier = "NewsTableViewCell"
+    var queryText = ""
     var data: [Article] = []
     let networkManager = NetworkManager()
     
     var newsTableView = UITableView()
-    var newsRefreshControl = UIRefreshControl()
     var searchBar = UISearchBar()
     var requestButton: UIButton = {
         let button = UIButton()
@@ -17,8 +17,6 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 12
         return button
     }()
-    
-    var queryText = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,28 +32,9 @@ class ViewController: UIViewController {
         let xibCell = UINib(nibName: cellIdentifier, bundle: nil)
         newsTableView.register(xibCell, forCellReuseIdentifier: cellIdentifier)
         
-        newsRefreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
-        newsTableView.refreshControl = self.newsRefreshControl
-        
         setSearchBarConstraints()
         setNewsTableViewConstraints()
         setRequestButtonConstraints()
-    }
-    
-    @objc
-    func refreshData(sender: UIRefreshControl) {
-        networkManager.getArticles(query: "Apple") { result in
-            switch result {
-            case .success(let articles):
-                self.data = articles
-                DispatchQueue.main.async {
-                    self.newsTableView.reloadData()
-                }
-            case .failure(_):
-                break
-            }
-        }
-        self.newsRefreshControl.endRefreshing()
     }
     
     @objc
@@ -96,7 +75,6 @@ class ViewController: UIViewController {
         requestButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 0).isActive = true
         requestButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 7).isActive = true
         requestButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.27).isActive = true
-        //requestButton.heightAnchor.constraint(equalTo: searchBar.heightAnchor).isActive = true
     }
 }
 
