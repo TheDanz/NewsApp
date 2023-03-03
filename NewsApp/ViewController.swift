@@ -8,42 +8,43 @@ class ViewController: UIViewController {
     
     var newsTableView = UITableView()
     var newsRefreshControl = UIRefreshControl()
+    var searchBar = UISearchBar()
+    var requestButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Request", for: .normal)
+        button.titleLabel!.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    var queryText = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         
         newsTableView.delegate = self
         newsTableView.dataSource = self
-        view.addSubview(newsTableView)
+        
+        searchBar.delegate = self
+        
+        requestButton.addTarget(self, action: #selector(requestButtonClick(_:)), for: .touchUpInside)
         
         let xibCell = UINib(nibName: cellIdentifier, bundle: nil)
         newsTableView.register(xibCell, forCellReuseIdentifier: cellIdentifier)
         
         newsRefreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
         newsTableView.refreshControl = self.newsRefreshControl
-
-        networkManager.getArticles { result in
-            switch result {
-            case .success(let articles):
-                self.data = articles
-                DispatchQueue.main.async {
-                    self.newsTableView.reloadData()
-                }
-            case .failure(_):
-                break
-            }
-        }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         
-        newsTableView.frame = view.bounds
+        setSearchBarConstraints()
+        setNewsTableViewConstraints()
+        setRequestButtonConstraints()
     }
     
     @objc
     func refreshData(sender: UIRefreshControl) {
-        networkManager.getArticles { result in
+        networkManager.getArticles(query: "Apple") { result in
             switch result {
             case .success(let articles):
                 self.data = articles
@@ -56,15 +57,56 @@ class ViewController: UIViewController {
         }
         self.newsRefreshControl.endRefreshing()
     }
-}
-
-extension ViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+    
+    @objc
+    func requestButtonClick(_ sender: Any) {
+        networkManager.getArticles(query: queryText) { result in
+            switch result {
+            case .success(let articles):
+                self.data = articles
+                DispatchQueue.main.async {
+                    self.newsTableView.reloadData()
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func setSearchBarConstraints() {
+        view.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        searchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
+    }
+    
+    func setNewsTableViewConstraints() {
+        view.addSubview(newsTableView)
+        newsTableView.translatesAutoresizingMaskIntoConstraints = false
+        newsTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        newsTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        newsTableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 0).isActive = true
+        newsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+    }
+    
+    func setRequestButtonConstraints() {
+        view.addSubview(requestButton)
+        requestButton.translatesAutoresizingMaskIntoConstraints = false
+        requestButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 0).isActive = true
+        requestButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 7).isActive = true
+        requestButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.27).isActive = true
+        //requestButton.heightAnchor.constraint(equalTo: searchBar.heightAnchor).isActive = true
     }
 }
 
-extension ViewController: UITableViewDataSource {
+// MARK: - Table View Methods
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationVC = DetailsViewController()
@@ -88,5 +130,17 @@ extension ViewController: UITableViewDataSource {
             }
         }
         return cell
+    }
+}
+
+// MARK: - Search Bar Methods
+
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText != "" {
+            self.queryText = searchText
+        }
     }
 }

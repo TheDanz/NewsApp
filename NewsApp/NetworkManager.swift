@@ -6,9 +6,9 @@ class NetworkManager {
     let APIKey = "8be4ff77f9294f22a4ab354b89de632c"
     let session = URLSession.shared
     
-    func getArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
+    func getArticles(query: String, completion: @escaping (Result<[Article], Error>) -> Void) {
         
-        guard let URL = URL(string: "https://newsapi.org/v2/everything?q=apple&language=en&pageSize=20&apiKey=\(APIKey)") else {
+        guard let URL = URL(string: "https://newsapi.org/v2/everything?q=\(query)&language=en&pageSize=20&apiKey=\(APIKey)") else {
             return
         }
         
