@@ -8,7 +8,7 @@ class NetworkManager {
     
     func getArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
         
-        guard let URL = URL(string: "https://newsapi.org/v2/everything?q=apple&from=2023-02-01&language=en&pageSize=20&apiKey=\(APIKey)") else {
+        guard let URL = URL(string: "https://newsapi.org/v2/everything?q=apple&language=en&pageSize=20&apiKey=\(APIKey)") else {
             return
         }
         
