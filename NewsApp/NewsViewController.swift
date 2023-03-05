@@ -7,12 +7,20 @@ class NewsViewController: UIViewController {
     let networkManager = NetworkManager()
     
     var newsTableView = UITableView()
-    var searchBar = UISearchBar()
+    
+    var newsSearchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.layer.borderWidth = 1
+        searchBar.layer.borderColor = UIColor.white.cgColor
+        return searchBar
+    }()
+    
+    
     var requestButton: UIButton = {
         let button = UIButton()
         button.setTitle("Request", for: .normal)
         button.titleLabel!.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
-        button.backgroundColor = .gray
+        button.backgroundColor = .systemIndigo
         button.layer.cornerRadius = 12
         return button
     }()
@@ -24,7 +32,7 @@ class NewsViewController: UIViewController {
         newsTableView.delegate = self
         newsTableView.dataSource = self
         
-        searchBar.delegate = self
+        newsSearchBar.delegate = self
         
         requestButton.addTarget(self, action: #selector(requestButtonClick(_:)), for: .touchUpInside)
         
@@ -51,11 +59,11 @@ class NewsViewController: UIViewController {
     }
     
     func setSearchBarConstraints() {
-        view.addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        searchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
+        view.addSubview(newsSearchBar)
+        newsSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        newsSearchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        newsSearchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        newsSearchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
     }
     
     func setNewsTableViewConstraints() {
@@ -63,14 +71,14 @@ class NewsViewController: UIViewController {
         newsTableView.translatesAutoresizingMaskIntoConstraints = false
         newsTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
         newsTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-        newsTableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 0).isActive = true
+        newsTableView.topAnchor.constraint(equalTo: newsSearchBar.bottomAnchor, constant: 0).isActive = true
         newsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
     
     func setRequestButtonConstraints() {
         view.addSubview(requestButton)
         requestButton.translatesAutoresizingMaskIntoConstraints = false
-        requestButton.leftAnchor.constraint(equalTo: searchBar.rightAnchor, constant: 0).isActive = true
+        requestButton.leftAnchor.constraint(equalTo: newsSearchBar.rightAnchor, constant: 0).isActive = true
         requestButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 7).isActive = true
         requestButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.27).isActive = true
     }
