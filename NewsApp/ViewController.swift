@@ -2,7 +2,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let cellIdentifier = "NewsTableViewCell"
     var queryText = ""
     var data: [Article] = []
     let networkManager = NetworkManager()
@@ -29,8 +28,7 @@ class ViewController: UIViewController {
         
         requestButton.addTarget(self, action: #selector(requestButtonClick(_:)), for: .touchUpInside)
         
-        let xibCell = UINib(nibName: cellIdentifier, bundle: nil)
-        newsTableView.register(xibCell, forCellReuseIdentifier: cellIdentifier)
+        newsTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         
         setSearchBarConstraints()
         setNewsTableViewConstraints()
@@ -97,7 +95,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? NewsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier) as? NewsTableViewCell else {
             return UITableViewCell()
         }
         cell.titleLabel.text = data[indexPath.row].title
@@ -105,6 +103,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         networkManager.getPoster(from: url!) { image in
             DispatchQueue.main.async {
                 cell.posterImageView.image = image
+                cell.activityIndicator.stopAnimating()
             }
         }
         return cell
