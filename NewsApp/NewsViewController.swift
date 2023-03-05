@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class NewsViewController: UIViewController {
     
     var queryText = ""
     var data: [Article] = []
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
 
 // MARK: - Table View Methods
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
@@ -112,7 +112,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
 // MARK: - Search Bar Methods
 
-extension ViewController: UISearchBarDelegate {
+extension NewsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		05648F03299D381B0044621D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05648F02299D381A0044621D /* AppDelegate.swift */; };
 		05648F05299D381B0044621D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05648F04299D381B0044621D /* SceneDelegate.swift */; };
-		05648F07299D381B0044621D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05648F06299D381B0044621D /* ViewController.swift */; };
+		05648F07299D381B0044621D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05648F06299D381B0044621D /* NewsViewController.swift */; };
 		05648F0C299D381C0044621D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05648F0B299D381C0044621D /* Assets.xcassets */; };
 		05648F0F299D381C0044621D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05648F0D299D381C0044621D /* LaunchScreen.storyboard */; };
 		05D250E429A00BDC00BDB7AF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D250E329A00BDC00BDB7AF /* NetworkManager.swift */; };
@@ -22,7 +22,7 @@
 		05648EFF299D381A0044621D /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05648F02299D381A0044621D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05648F04299D381B0044621D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		05648F06299D381B0044621D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		05648F06299D381B0044621D /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		05648F0B299D381C0044621D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05648F0E299D381C0044621D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05648F10299D381C0044621D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 			children = (
 				05648F02299D381A0044621D /* AppDelegate.swift */,
 				05648F04299D381B0044621D /* SceneDelegate.swift */,
-				05648F06299D381B0044621D /* ViewController.swift */,
+				05648F06299D381B0044621D /* NewsViewController.swift */,
 				05F543BF29A533CB00A61A2C /* DetailsViewController.swift */,
 				05D250E329A00BDC00BDB7AF /* NetworkManager.swift */,
 				05E3A94F29A3F810008B146B /* NewsTableViewCell.swift */,
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05D250E629A00C8D00BDB7AF /* JSONModel.swift in Sources */,
-				05648F07299D381B0044621D /* ViewController.swift in Sources */,
+				05648F07299D381B0044621D /* NewsViewController.swift in Sources */,
 				05E3A95129A3F810008B146B /* NewsTableViewCell.swift in Sources */,
 				05648F03299D381B0044621D /* AppDelegate.swift in Sources */,
 				05F543C029A533CB00A61A2C /* DetailsViewController.swift in Sources */,
