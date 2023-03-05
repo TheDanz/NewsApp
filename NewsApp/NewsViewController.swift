@@ -103,17 +103,11 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier) as? NewsTableViewCell else {
             return UITableViewCell()
         }
-        cell.titleLabel.text = data[indexPath.row].title
-        let url = URL(string: data[indexPath.row].urlToImage!)
-        networkManager.getPoster(from: url!) { image in
-            DispatchQueue.main.async {
-                cell.posterImageView.image = image
-                cell.activityIndicator.stopAnimating()
-            }
-        }
+        cell.data = data[indexPath.row]
         return cell
     }
 }

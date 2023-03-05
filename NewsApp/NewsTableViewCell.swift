@@ -28,6 +28,30 @@ class NewsTableViewCell: UITableViewCell {
         return activityIndicator
     }()
     
+    var data: Article? {
+        didSet {
+            
+            guard let data = data else { fatalError("Data error") }
+            
+            titleLabel.text = data.title
+
+            if let urlToImage = data.urlToImage {
+                if let url = URL(string: urlToImage) {
+                    let networkManager = NetworkManager()
+                    networkManager.getPoster(from: url) { image in
+                        DispatchQueue.main.async {
+                            self.posterImageView.image = image
+                            self.activityIndicator.stopAnimating()
+                        }
+                    }
+                }
+            } else {
+                posterImageView.image = UIImage(systemName: "newspaper")
+                activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
